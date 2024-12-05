@@ -1,5 +1,5 @@
 from queue_system import connect_to_queue_manager
-from task import Task
+from Task import Task
 
 
 def boss():
@@ -10,8 +10,15 @@ def boss():
 
     # Création et ajout des tâches
     print("Boss: Adding tasks to the queue...")
-    for i in range(10):  # Génère 10 tâches
-        task = Task(identifier=i)
+    for i in range(10):  # Génère 10 tâches avec des paramètres fictifs
+        task = Task(
+            identifier=i,
+            size=100,        # Exemple de taille
+            a=2,             # Exemple de valeur pour a
+            b=3,             # Exemple de valeur pour b
+            x=i,             # Exemple de valeur pour x (variable avec i)
+            time_to_work=1   # Durée de travail simulée de 1 seconde
+        )
         print(f"Boss: Adding Task {task.identifier} to the queue.")
         task_queue.put(task)
 

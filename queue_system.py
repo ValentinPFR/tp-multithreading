@@ -5,16 +5,20 @@ from multiprocessing import Queue
 task_queue = Queue()
 result_queue = Queue()
 
+# Fonctions pour retourner les queues
+def get_task_queue():
+    return task_queue
+
+def get_result_queue():
+    return result_queue
 
 # Définition du QueueManager
 class QueueManager(BaseManager):
     pass
 
-
 # Enregistrement des queues
-QueueManager.register("get_task_queue", callable=lambda: task_queue)
-QueueManager.register("get_result_queue", callable=lambda: result_queue)
-
+QueueManager.register("get_task_queue", callable=get_task_queue)
+QueueManager.register("get_result_queue", callable=get_result_queue)
 
 # Fonction pour démarrer le QueueManager
 def start_queue_manager():
@@ -30,7 +34,6 @@ def start_queue_manager():
     finally:
         manager.shutdown()
 
-
 # Fonction pour connecter un QueueClient
 def connect_to_queue_manager():
     print("QueueClient: Connecting to QueueManager...")
@@ -38,7 +41,6 @@ def connect_to_queue_manager():
     manager.connect()
     print("QueueClient: Connected.")
     return manager
-
 
 if __name__ == "__main__":
     start_queue_manager()
